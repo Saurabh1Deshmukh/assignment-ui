@@ -35,7 +35,8 @@ pipeline {
    		stage("Deploy to Docker Environment"){
 			steps {
 				sshagent(["aws-cred"]) {
-   					sh "ssh -o StrictHostKeyChecking=no ec2-user@172.31.38.88 docker run -d -p 8282:8282 --name assignment-backend saurabh1deshmukh/assignment-backend:1.0.0"
+					sh "ssh -o StrictHostKeyChecking=no ubuntu@ec2-13-234-119-123.ap-south-1.compute.amazonaws.com sudo chmod 666 /var/run/docker.sock"
+   					sh "ssh -o StrictHostKeyChecking=no ubuntu@ec2-13-234-119-123.ap-south-1.compute.amazonaws.com docker run -d -p 8282:8282 --name assignment-backend saurabh1deshmukh/assignment-backend:1.0.0"
 				}
 			}
    		}
